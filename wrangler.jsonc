@@ -1,0 +1,12 @@
+// Cloudflare Workers 정적 배포 설정.
+// 빌드 명령(npm run build)이 만든 dist/ 를 그대로 정적 파일로 올립니다.
+// 이 파일이 없으면 `wrangler deploy` 가 Astro Cloudflare 어댑터를 자동 설치해
+// 출력 폴더가 dist/client 로 바뀌고 SEO 점검이 실패합니다.
+{
+  "name": "infolog",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
