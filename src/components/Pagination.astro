@@ -1,0 +1,55 @@
+---
+import type { Page } from 'astro';
+
+interface Props {
+  page: Page<unknown>;
+  /** 1페이지 URL (예: /blog/, /category/sports/) */
+  baseUrl: string;
+}
+
+const { page, baseUrl } = Astro.props;
+const base = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+const urlFor = (n: number) => (n === 1 ? base : `${base}${n}/`);
+
+// 현재 페이지 기준 ±2 범위
+const start = Math.max(1, page.currentPage - 2);
+const end = Math.min(page.lastPage, page.currentPage + 2);
+const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+const btn = 'flex h-10 min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-semibold transition-colors';
+---
+
+{
+  page.lastPage > 1 && (
+    <nav aria-label="페이지 이동" class="mt-10 flex flex-wrap items-center justify-center gap-2">
+      {page.url.prev ? (
+        <a href={page.url.prev} rel="prev" class:list={[btn, 'border-line text-ink hover:border-accent hover:text-accent']}>
+          ← 이전
+        </a>
+      ) : (
+        <span class:list={[btn, 'border-line/40 text-muted/40']} aria-hidden="true">
+          ← 이전
+        </span>
+      )}
+      {pages.map((n) =>
+        n === page.currentPage ? (
+          <span aria-current="page" class:list={[btn, 'border-accent bg-accent text-navy']}>
+            {n}
+          </span>
+        ) : (
+          <a href={urlFor(n)} class:list={[btn, 'border-line text-ink hover:border-accent hover:text-accent']}>
+            {n}
+          </a>
+        ),
+      )}
+      {page.url.next ? (
+        <a href={page.url.next} rel="next" class:list={[btn, 'border-line text-ink hover:border-accent hover:text-accent']}>
+          다음 →
+        </a>
+      ) : (
+        <span class:list={[btn, 'border-line/40 text-muted/40']} aria-hidden="true">
+          다음 →
+        </span>
+      )}
+    </nav>
+  )
+}

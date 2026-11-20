@@ -1,0 +1,40 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { SITE } from '../../consts';
+import { getPublishedPosts, type Post } from '../../utils/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPublishedPosts();
+  return paginate(posts, { pageSize: SITE.postsPerPage });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<Post>;
+}
+
+const { page } = Astro.props;
+const suffix = page.currentPage > 1 ? ` (${page.currentPage}페이지)` : '';
+---
+
+<BaseLayout
+  title={`전체 글${suffix}`}
+  description={`${SITE.name}에 발행된 스포츠 중계, 링크모음, 웹툰·OTT·애니 플랫폼, 피싱·보안, 주간 이슈 글 전체를 최신순으로 모아 보세요.${suffix}`}
+  prevUrl={page.url.prev}
+  nextUrl={page.url.next}
+>
+  <div class="mx-auto max-w-6xl px-4 pt-8">
+    <Breadcrumb items={[{ name: '홈', href: '/' }, { name: '전체 글' }]} />
+    <h1 class="mt-4 text-3xl font-extrabold text-white">전체 글</h1>
+    <p class="mt-2 text-muted">총 {page.total}개의 글 · 최신순</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {page.data.map((post) => <PostCard post={post} />)}
+    </div>
+
+    <Pagination page={page} baseUrl="/blog/" />
+  </div>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import PostLayout from '../layouts/PostLayout.astro';
+import SoftCTA from '../components/SoftCTA.astro';
+import MainBannerCTA from '../components/MainBannerCTA.astro';
+import SummaryBox from '../components/SummaryBox.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { getPublishedPosts, type Post } from '../utils/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout post={post}>
+  {/* MDX 본문에서 import 없이 <SoftCTA /> 등을 바로 쓸 수 있도록 주입 */}
+  <Content components={{ SoftCTA, MainBannerCTA, SummaryBox, FaqAccordion }} />
+</PostLayout>

@@ -1,0 +1,70 @@
+---
+import { CATEGORIES, SITE } from '../consts';
+
+const path = Astro.url.pathname;
+// 공식 링크 허브(/links/)는 '링크모음'(guide) 카테고리의 대표 페이지 → 같은 메뉴로 활성 표시
+const isActive = (slug: string) =>
+  path.startsWith(`/category/${slug}/`) || (slug === 'guide' && path.startsWith('/links/'));
+---
+
+<header class="sticky top-0 z-40 border-b border-line/70 bg-navy/90 backdrop-blur supports-[backdrop-filter]:bg-navy/75">
+  <div class="mx-auto flex h-14 max-w-6xl items-center gap-4 px-4">
+    <a href="/" class="flex shrink-0 items-center gap-2 font-extrabold tracking-tight text-white" aria-label={`${SITE.name} 홈`}>
+      <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
+      <span class="text-lg">{SITE.name}</span>
+    </a>
+
+    <nav aria-label="카테고리" class="ml-auto hidden lg:block">
+      <ul class="flex items-center gap-1 text-[15px] font-medium">
+        {
+          CATEGORIES.map((c) => (
+            <li>
+              <a
+                href={`/category/${c.slug}/`}
+                class:list={[
+                  'rounded-lg px-3 py-2 transition-colors hover:bg-card hover:text-white',
+                  isActive(c.slug) ? 'text-accent' : 'text-muted',
+                ]}
+                aria-current={isActive(c.slug) ? 'page' : undefined}
+              >
+                {c.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a
+      href="/search/"
+      class="ml-auto flex h-10 w-10 items-center justify-center rounded-lg text-muted transition-colors hover:bg-card hover:text-white lg:ml-0"
+      aria-label="글 검색"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- 모바일: 가로 스크롤 카테고리 칩 (JS 없음) -->
+  <nav aria-label="카테고리 (모바일)" class="border-t border-line/50 lg:hidden">
+    <ul class="flex gap-2 overflow-x-auto px-4 py-2 text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {
+        CATEGORIES.map((c) => (
+          <li class="shrink-0">
+            <a
+              href={`/category/${c.slug}/`}
+              class:list={[
+                'block rounded-full border px-3 py-1.5',
+                isActive(c.slug) ? 'border-accent/60 bg-accent/10 text-accent' : 'border-line text-muted',
+              ]}
+              aria-current={isActive(c.slug) ? 'page' : undefined}
+            >
+              {c.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,28 @@
+---
+/** 화면용 브레드크럼 (JSON-LD 는 PostLayout 에서 함께 생성) */
+interface Props {
+  items: { name: string; href?: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav aria-label="현재 위치" class="text-sm text-muted">
+  <ol class="flex flex-wrap items-center gap-1.5">
+    {
+      items.map((item, i) => (
+        <li class="flex min-w-0 items-center gap-1.5">
+          {i > 0 && <span aria-hidden="true" class="text-line">/</span>}
+          {item.href ? (
+            <a href={item.href} class="hover:text-accent">
+              {item.name}
+            </a>
+          ) : (
+            <span aria-current="page" class="truncate text-ink/70">
+              {item.name}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

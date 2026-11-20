@@ -1,0 +1,29 @@
+{
+  "name": "infolog",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && node scripts/seo-check.mjs",
+    "build:fast": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "images": "node scripts/generate-images.mjs",
+    "daily": "node scripts/daily-publish.mjs",
+    "new":"node scripts/new-post.mjs",
+    "seo": "node scripts/seo-check.mjs",
+    "links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/mdx": "^8.1.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.6",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.13",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^6.0.3"
+  }
+}

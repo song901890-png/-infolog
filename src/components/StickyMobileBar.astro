@@ -1,0 +1,92 @@
+---
+/**
+ * <StickyMobileBar /> — 모바일 하단 고정 전환 바
+ * - md 미만 화면에서만 노출, 일정 스크롤(기본 35%) 이후 슬라이드 업
+ * - 닫기(X) 시 해당 세션 동안 다시 표시하지 않음
+ */
+import { CTA } from '../consts';
+
+interface Props {
+  text?: string;
+  buttonText?: string;
+  href?: string;
+}
+
+const { text = CTA.stickyText, buttonText = '바로가기', href = CTA.url } = Astro.props;
+// CTA URL 이 미설정(placeholder)이면 렌더링하지 않음 — 깨진 외부 링크 방지
+const show = href === CTA.url ? CTA.enabled : Boolean(href);
+---
+
+{show && (
+<div
+  id="sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-50 translate-y-full border-t border-accent/30 bg-card/95 px-3 pb-[calc(0.6rem+env(safe-area-inset-bottom))] pt-2.5 shadow-[0_-8px_24px_rgba(0,0,0,0.35)] backdrop-blur transition-transform duration-300 md:hidden"
+  aria-hidden="true"
+>
+  <div class="mx-auto flex max-w-xl items-center gap-2">
+    <p class="min-w-0 flex-1 truncate text-sm font-semibold text-ink">
+      <span class="mr-1 text-accent" aria-hidden="true">●</span>{text}
+    </p>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener nofollow"
+      tabindex="-1"
+      class="shrink-0 rounded-lg bg-accent px-3.5 py-2 text-sm font-extrabold text-navy"
+      data-cta="sticky">{buttonText}</a
+    >
+    <button
+      type="button"
+      id="sticky-cta-close"
+      tabindex="-1"
+      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-navy hover:text-white"
+      aria-label="안내 바 닫기"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+    </button>
+  </div>
+</div>
+)}
+
+<script>
+  const KEY = 'infolog:sticky-cta-dismissed';
+  const bar = document.getElementById('sticky-cta');
+  const close = document.getElementById('sticky-cta-close');
+
+  let dismissed = false;
+  try {
+    dismissed = sessionStorage.getItem(KEY) === '1';
+  } catch {}
+
+  if (bar && !dismissed) {
+    const focusables = bar.querySelectorAll<HTMLElement>('a, button');
+    let shown = false;
+    const setShown = (v: boolean) => {
+      if (v === shown) return;
+      shown = v;
+      bar.classList.toggle('translate-y-full', !v);
+      bar.setAttribute('aria-hidden', String(!v));
+      focusables.forEach((el) => (v ? el.removeAttribute('tabindex') : el.setAttribute('tabindex', '-1')));
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        setShown(max > 0 && window.scrollY / max > 0.35);
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    close?.addEventListener('click', () => {
+      setShown(false);
+      window.removeEventListener('scroll', onScroll);
+      try {
+        sessionStorage.setItem(KEY, '1');
+      } catch {}
+    });
+  }
+</script>

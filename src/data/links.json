@@ -1,0 +1,94 @@
+{
+  "$comment": "공식 링크 허브(/links/) 데이터. 주소를 바꾸거나 추가한 뒤 checked 날짜를 갱신하고 `npm run links` 로 접속 확인하세요.",
+  "checked": "2026-11-20",
+  "sections": [
+    {
+      "id": "webtoon",
+      "title": "웹툰 공식 사이트 모음",
+      "description": "국내 주요 웹툰·만화 플랫폼의 공식 주소입니다. '기다리면 무료', 매일 무료, 이벤트 회차로 합법적으로 무료 감상할 수 있습니다.",
+      "related": { "label": "웹툰 플랫폼 비교와 합법 무료 이용 팁", "href": "/webtoon-platform-comparison-free-tips/" },
+      "links": [
+        { "name": "네이버웹툰", "url": "https://comic.naver.com/", "note": "요일별 연재, 신인·도전만화까지 폭넓은 작품" },
+        { "name": "카카오웹툰", "url": "https://webtoon.kakao.com/", "note": "카카오 오리지널 웹툰, 기다리면 무료" },
+        { "name": "카카오페이지", "url": "https://page.kakao.com/", "note": "웹툰·웹소설 IP 중심, 장편 작품 다수" },
+        { "name": "네이버 시리즈", "url": "https://series.naver.com/", "note": "웹소설·만화 단행본, 매일 무료 이용권" },
+        { "name": "레진코믹스", "url": "https://www.lezhin.com/ko", "note": "장르물 중심, 기간 한정 무료 프로모션" },
+        { "name": "리디", "url": "https://ridibooks.com/", "note": "만화·웹툰·전자책 통합, 대여 이벤트" },
+        { "name": "봄툰", "url": "https://www.bomtoon.com/", "note": "로맨스·BL 장르 중심 웹툰" },
+        { "name": "미스터블루", "url": "https://www.mrblue.com/", "note": "만화 단행본·웹툰, 완결작 다수" }
+      ]
+    },
+    {
+      "id": "sports-stream",
+      "title": "스포츠중계 공식 플랫폼 모음",
+      "description": "국내에서 스포츠 생중계·다시보기를 제공하는 공식 플랫폼입니다. 중계권은 리그·시즌마다 바뀌므로 경기 전 편성표를 꼭 확인하세요.",
+      "related": { "label": "합법 중계 플랫폼 고르는 5가지 기준", "href": "/sports-legal-streaming-checklist/" },
+      "links": [
+        { "name": "네이버 스포츠", "url": "https://m.sports.naver.com/", "note": "경기 일정·결과, 일부 생중계와 하이라이트" },
+        { "name": "다음 스포츠", "url": "https://sports.daum.net/", "note": "경기 일정·결과, 일부 생중계와 하이라이트" },
+        { "name": "쿠팡플레이", "url": "https://www.coupangplay.com/", "note": "OTT, 해외축구 등 스포츠 중계 (요금제 확인)" },
+        { "name": "티빙", "url": "https://www.tving.com/", "note": "OTT, 스포츠 생중계 (요금제 확인)" },
+        { "name": "SPOTV NOW", "url": "https://www.spotvnow.co.kr/", "note": "스포츠 전문 OTT" },
+        { "name": "SOOP", "url": "https://www.sooplive.com/", "note": "스트리밍 플랫폼, 일부 공식 스포츠 중계" }
+      ]
+    },
+    {
+      "id": "sports-league",
+      "title": "리그·협회 공식 사이트 모음",
+      "description": "경기 일정과 중계 채널의 1차 출처입니다. 블로그·커뮤니티 정보보다 리그 공식 발표가 가장 정확합니다.",
+      "links": [
+        { "name": "KBO 리그", "url": "https://www.koreabaseball.com/", "note": "프로야구 일정·순위·중계 안내" },
+        { "name": "K리그", "url": "https://www.kleague.com/", "note": "프로축구 일정·순위" },
+        { "name": "대한축구협회(KFA)", "url": "https://www.kfa.or.kr/", "note": "국가대표 경기 일정" },
+        { "name": "KBL", "url": "https://kbl.or.kr/", "note": "프로농구 일정·순위" },
+        { "name": "KOVO", "url": "https://kovo.co.kr/", "note": "프로배구 일정·순위" },
+        { "name": "프리미어리그", "url": "https://www.premierleague.com/", "note": "EPL 일정·결과 (영문)" },
+        { "name": "UEFA", "url": "https://www.uefa.com/", "note": "챔피언스리그 등 유럽 대항전 (영문)" },
+        { "name": "MLB", "url": "https://www.mlb.com/", "note": "메이저리그 일정·결과 (영문)" },
+        { "name": "NBA", "url": "https://www.nba.com/", "note": "NBA 일정·결과 (영문)" }
+      ]
+    },
+    {
+      "id": "ott",
+      "title": "OTT 공식 사이트 모음",
+      "description": "드라마·영화·예능을 합법적으로 볼 수 있는 국내 서비스 중인 OTT 공식 주소입니다.",
+      "links": [
+        { "name": "넷플릭스", "url": "https://www.netflix.com/kr/", "note": "글로벌 오리지널 시리즈·영화" },
+        { "name": "티빙", "url": "https://www.tving.com/", "note": "국내 방송·오리지널, 스포츠" },
+        { "name": "웨이브", "url": "https://www.wavve.com/", "note": "지상파 방송 다시보기" },
+        { "name": "쿠팡플레이", "url": "https://www.coupangplay.com/", "note": "쿠팡 와우 회원 OTT, 스포츠" },
+        { "name": "디즈니+", "url": "https://www.disneyplus.com/ko-kr", "note": "디즈니·마블·픽사 작품" },
+        { "name": "왓챠", "url": "https://watcha.com/", "note": "영화·드라마, 취향 추천" }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "피싱·불법 사이트 신고처",
+      "description": "가짜 사이트, 스미싱, 저작권 침해 사이트를 발견했을 때 신고할 수 있는 공공기관입니다.",
+      "related": { "label": "가짜 주소 구별법과 접속 오류 해결", "href": "/site-connection-error-dns-fix/" },
+      "links": [
+        { "name": "KISA 보호나라", "url": "https://www.boho.or.kr/", "note": "해킹·스미싱·피싱 신고 (국번 없이 118)" },
+        { "name": "경찰청 사이버범죄 신고시스템", "url": "https://ecrm.police.go.kr/", "note": "사이버 사기·범죄 신고" },
+        { "name": "한국저작권보호원", "url": "https://www.kcopa.or.kr/", "note": "불법 웹툰·영상 등 저작권 침해 신고" }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "왜 공식 사이트 주소만 모아 두나요?",
+      "answer": "검색이나 메신저로 퍼지는 '주소 모음'에는 피싱 사이트와 저작권을 침해하는 불법 사이트가 섞여 있는 경우가 많습니다. 인포로그는 운영사가 직접 운영하는 공식 주소만 확인해 싣습니다."
+    },
+    {
+      "question": "링크는 얼마나 자주 확인하나요?",
+      "answer": "정기적으로 모든 링크의 접속 여부를 점검하고, 페이지 상단에 마지막 확인일을 표시합니다. 주소가 바뀌거나 서비스가 종료되면 바로 반영합니다."
+    },
+    {
+      "question": "스포츠중계는 어디서 봐야 하나요?",
+      "answer": "중계권은 리그와 시즌마다 바뀌므로 먼저 리그 공식 사이트의 일정·중계 안내를 확인한 뒤, 해당 경기를 중계하는 공식 플랫폼에서 시청하는 것이 가장 정확하고 안전합니다."
+    },
+    {
+      "question": "무료로 웹툰을 볼 수 있는 합법적인 방법이 있나요?",
+      "answer": "네. 대부분의 공식 플랫폼이 '기다리면 무료', 매일 무료 이용권, 완결·이벤트 무료 회차를 제공합니다. 출석 체크와 이벤트 보상을 활용하면 결제 없이도 많은 회차를 볼 수 있습니다."
+    }
+  ]
+}

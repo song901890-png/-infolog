@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# /search/ 는 페이지 내 <meta name="robots" content="noindex"> 로 색인 제외합니다.
+# (robots.txt 로 막으면 크롤러가 noindex 를 읽지 못해 URL 만 색인될 수 있음)
+
+Sitemap: https://infolog.site/sitemap-index.xml

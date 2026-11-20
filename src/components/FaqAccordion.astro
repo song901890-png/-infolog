@@ -1,0 +1,59 @@
+---
+/**
+ * <FaqAccordion /> — 하단 FAQ 아코디언 + FAQPage JSON-LD 자동 주입
+ * 프론트매터의 faq 배열을 넘기면 됩니다. JS 없이 <details>/<summary> 로 동작합니다.
+ */
+interface Props {
+  items: { question: string; answer: string }[];
+  title?: string;
+}
+
+const { items, title = '자주 묻는 질문' } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+{
+  items.length > 0 && (
+    <section class="not-prose my-10" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="mb-4 text-xl font-extrabold text-white">
+        {title} <span class="text-sm font-semibold text-muted">FAQ</span>
+      </h2>
+      <div class="divide-y divide-line overflow-hidden rounded-xl border border-line bg-card/60">
+        {items.map((f, i) => (
+          <details class="group" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-start gap-3 px-4 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-card sm:px-5 [&::-webkit-details-marker]:hidden">
+              <span class="mt-px shrink-0 font-extrabold text-accent">Q.</span>
+              <span class="flex-1">{f.question}</span>
+              <svg
+                class="mt-1 shrink-0 text-muted transition-transform group-open:rotate-180"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <div class="flex gap-3 px-4 pb-5 text-[15px] leading-relaxed text-ink/90 sm:px-5">
+              <span class="shrink-0 font-extrabold text-sky">A.</span>
+              <p>{f.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    </section>
+  )
+}

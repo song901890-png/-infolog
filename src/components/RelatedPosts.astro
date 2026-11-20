@@ -1,0 +1,35 @@
+---
+/**
+ * <RelatedPosts /> — 함께 보면 좋은 글
+ * 같은 카테고리 최신 글 3개를 노출하고, 부족하면 다른 카테고리 최신 글로 채웁니다.
+ */
+import PostCard from './PostCard.astro';
+import { getPublishedPosts } from '../utils/posts';
+
+interface Props {
+  currentId: string;
+  category: string;
+  limit?: number;
+}
+
+const { currentId, category, limit = 3 } = Astro.props;
+const others = (await getPublishedPosts()).filter((p) => p.id !== currentId);
+const sameCategory = others.filter((p) => p.data.category === category);
+const filler = others.filter((p) => p.data.category !== category);
+const related = [...sameCategory, ...filler].slice(0, limit);
+---
+
+{
+  related.length > 0 && (
+    <section class="not-prose my-12" aria-labelledby="related-title">
+      <h2 id="related-title" class="mb-4 text-xl font-extrabold text-white">
+        함께 보면 좋은 글
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((post) => (
+          <PostCard post={post} compact headingLevel="h3" />
+        ))}
+      </div>
+    </section>
+  )
+}
